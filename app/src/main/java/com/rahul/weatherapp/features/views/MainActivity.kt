@@ -188,6 +188,7 @@ updates UI
                             currentLocation!!.longitude, model
                         )
                     } else {
+                        binding.progressBar.visibility = View.GONE
                         showToast(this, "Please Enable Internet Access")
                     }
                 }
