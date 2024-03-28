@@ -25,6 +25,9 @@ import com.rahul.weatherapp.features.model.SearchList
 import com.rahul.weatherapp.features.model.WeatherData
 import com.rahul.weatherapp.features.model.WeatherModelImp
 import com.rahul.weatherapp.features.viewModel.WeatherViewModel
+import com.rahul.weatherapp.utils.celsiusToFahrenheit
+import com.rahul.weatherapp.utils.isInternetAvailable
+import com.rahul.weatherapp.utils.showToast
 
 class MainActivity : AppCompatActivity() {
 
@@ -93,7 +96,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun setWeatherInfo(weatherData: WeatherData) {
 
-        binding.tvErrorMessage.visibility = View.GONE
+//        binding.tvErrorMessage.visibility = View.GONE
         binding.progressBar.visibility = View.GONE
         showAllLayout()
 
@@ -109,8 +112,8 @@ class MainActivity : AppCompatActivity() {
         binding.layoutWeatherAdditional.tvHumidityValue.text = weatherData.humidity
         binding.layoutWeatherAdditional.tvPressureValue.text = weatherData.pressure
         binding.layoutWeatherAdditional.tvVisibilityValue.text = weatherData.visibility
-        binding.layoutWeatherAdditional.tvDescValue.text =
-            weatherData.weatherConditionIconDescription
+        binding.layoutWeatherAdditional.tvFahrenValue.text =
+            "${celsiusToFahrenheit(weatherData.temperature.toDouble())} °F"
 
         binding.layoutSunsetSunrise.tvSunriseTime.text = weatherData.sunrise
         binding.layoutSunsetSunrise.tvSunsetTime.text = weatherData.sunset
@@ -170,18 +173,25 @@ class MainActivity : AppCompatActivity() {
             if (task.isSuccessful && task.result != null) {
                 currentLocation = task.result
                 if (currentLocation?.latitude != null && currentLocation?.longitude != null) {
-                    viewModel.getWeatherInfo(
-                        currentLocation!!.latitude,
-                        currentLocation!!.longitude, model
-                    )
+                    if (isInternetAvailable(this)) {
+                        viewModel.getWeatherInfo(
+                            currentLocation!!.latitude,
+                            currentLocation!!.longitude, model
+                        )
+                    } else {
+                        showToast(this, "Please Enable Internet Access")
+                    }
                 }
             } else {
-                binding.progressBar.visibility = View.GONE
-                Toast.makeText(
-                    this,
-                    "Enable to fetch current location",
-                    Toast.LENGTH_SHORT
-                ).show()
+                if (isInternetAvailable(this)) {
+                    binding.progressBar.visibility = View.GONE
+                    showToast(this, "Unable to fetch current location")
+
+                } else {
+                    binding.progressBar.visibility = View.GONE
+                    showToast(this, "Please Enable Internet Access")
+
+                }
             }
         }
     }

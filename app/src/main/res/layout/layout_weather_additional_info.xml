@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<layout xmlns:tools="http://schemas.android.com/tools"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -73,21 +73,21 @@
             tools:text="4 km" />
 
         <TextView
-            android:id="@+id/tv_desc_label"
+            android:id="@+id/tv_fahren_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
-            android:text="@string/description"
+            android:text="@string/fahrenheit"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/tv_visibility_label" />
 
         <TextView
-            android:id="@+id/tv_desc_value"
+            android:id="@+id/tv_fahren_value"
             style="@style/DefaultTextStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="@id/guideline_value_start"
-            app:layout_constraintTop_toTopOf="@id/tv_desc_label"
+            app:layout_constraintTop_toTopOf="@id/tv_fahren_label"
             tools:text="desc" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
