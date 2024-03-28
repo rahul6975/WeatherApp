@@ -45,6 +45,7 @@ class WeatherViewModel : ViewModel() {
         })
     }
 
+
     fun getSearchResult(q: String, model: WeatherModel) {
         progressBarLiveData.postValue(true)
 

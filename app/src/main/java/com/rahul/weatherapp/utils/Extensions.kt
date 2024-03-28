@@ -50,6 +50,9 @@ fun celsiusToFahrenheit(celsius: Double): Double {
     return celsius * 9 / 5 + 32
 }
 
+/*
+checks internet connection
+ */
 fun isInternetAvailable(context: Context): Boolean {
     val connectivityManager =
         context.getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager

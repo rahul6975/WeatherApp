@@ -62,6 +62,9 @@ class MainActivity : AppCompatActivity() {
     }
 
 
+    /*
+setup onClickListeners
+ */
     private fun onClickListeners() {
         binding.searchButton.setOnClickListener {
             if (binding.autoCompleteTv.text.isNotEmpty()) {
@@ -70,6 +73,9 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    /*
+observes LiveData
+ */
     private fun setLiveDataListeners() {
         viewModel.weatherLiveData.observe(this, Observer { weatherData ->
             setWeatherInfo(weatherData)
@@ -94,9 +100,12 @@ class MainActivity : AppCompatActivity() {
         })
     }
 
+
+    /*
+updates UI
+ */
     private fun setWeatherInfo(weatherData: WeatherData) {
 
-//        binding.tvErrorMessage.visibility = View.GONE
         binding.progressBar.visibility = View.GONE
         showAllLayout()
 
